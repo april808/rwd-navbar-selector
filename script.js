@@ -1,45 +1,62 @@
-(function ($) {
-    $('body').addClass('variant-strm_light');
-    var menuSelector = $('#sidebar ul li a');
+//nav資料----------------------
+var nav_data={
+  wrapper:"wrapper",
+  fadeup:"fade-up",
+  navlist: [
+    {name:"home",},
+    {name:"profile"},
+    {name:"gallery"},
+    {name:"contact"}
+  ],
+};
+// navlist: ["home","profile","gallery","contact"]
 
+/* v-bind:id="'#' + title" */
+var vm=new Vue({
+  el: "#nav",
+  data: nav_data,
+});
+//wrapper資料----------------------
+var vm=new Vue({
+  el: "#wrapper",
+  data: nav_data,
+});
+//nav超連結----------------------
+$(document).on('click','a',function(event){/*nav超連結動畫*/
+  event.preventDefault();/*停止事件的默認動作*/
+  var target= $(this).attr("href");
+
+  $('html,body').animate({
+    scrollTop: $(target).offset().top
+  },600);
+});
+
+//進場動態
+(function ($) {
+    $('body').addClass('variant-strm_light');/*先綁隱藏的CSS*/
+    $('#home').addClass('fullscreen');
+    var menuSelector = $('#sidebar ul li a');
+  
     $(document)
         .ready(function () {
-            if(window.location.hash) {/*location.href 是包含 '#' 的網址*/
+            setTimeout(function () {
                 $("html, body")
-                    .removeClass('variant-strm_light')
-                    .animate({ scrollTop: $(window.location.hash).scrollTop() }, 1);
-            } else {
-                setTimeout(function () {
-                    $("html, body")
-                        .animate({scrollTop: $(document).height()}, 1)
-                        .animate({scrollTop: $("#home").scrollTop()}, 1);
-                    $('body').removeClass('variant-strm_light');
-                }, 1200);
-            };
-//             $('a[href^="#"]').on('click', function (e) {
-//                 e.preventDefault();
-//                 var target = this.hash;
-//                 $target = $(target);
-
-//                 $('html, body').animate({
-//                     'scrollTop': $target.offset().top
-//                 }, 600, 'linear', function () {
-//                     window.location.hash = target;
-//                     $(document).on("scroll", initScroll(menuSelector));
-//                 });
-//             });
+                    .animate({scrollTop: $(document).height()}, 1)
+                    .animate({scrollTop: $("#home").scrollTop()}, 1);
+                $('body').removeClass('variant-strm_light');
+            }, 1200);/*於1.2秒時拿掉隱藏用CSS*/
         })
-        .on('scroll', function () {
+        .on('scroll', function () {/*偵測超連結位置*/
             initScroll(menuSelector);
-        });
-
+        });/*$(document)結尾*/
+  
     function initScroll(menuSelector) {
-        var scrollPosition = $(document).scrollTop() + 5;
-
-        menuSelector.each(function () {
+        var scrollPosition = $(window).scrollTop() + 5;
+      
+        menuSelector.each(function () {/*.each每個元素運作函數*/
             var currLink = $(this);
             var refElement = $(currLink.attr("href"));
-            if (refElement.position().top <= scrollPosition && refElement.position().top + refElement.height() > scrollPosition) {
+            if (refElement.position().top <= scrollPosition && refElement.position().top + refElement.height() > scrollPosition) {/*設定螢幕範圍運作.active(CSS)*/
                 menuSelector.removeClass("active");
                 currLink.addClass("active");
             }
@@ -48,5 +65,4 @@
             }
         });
     }
-
 })(jQuery);
