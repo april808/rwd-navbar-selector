@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Test - 自適應超連結menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Noto+Sans+TC&amp;display=swap'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Fredoka&amp;display=swap'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Sidebar-->
+<section id="sidebar">
+  <div class="inner">
+    <nav>
+      <ul id="listitem">
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</section>
+<!-- Wrapper-->
+<div id="wrapper">
+  <!-- Home-->
+  <section class="wrapper fullscreen fade-up" id="home">
+    <div class="inner">
+      <h1 class="title-gradient">Hello！你好！</h1>
+      <div class="separator" style="clear: both">
+        <div class="lmcimg"></div>
+      </div>
+      <p>滑動且自適應超連結 menu 作法來源:<a href="https://tgomilar.github.io/paroller.js/#install" target="_blank">paroller.js</a></p>
+      <ul>
+        <li>text.</li>
+        <li>text.</li>
+      </ul>
+    </div>
+  </section>
+  <!-- Profile-->
+  <section class="wrapper fade-up" id="profile">
+    <div class="inner">
+      <h2 class="major">Profile</h2>
+      <div class="profilephoto"></div>
+    </div>
+  </section>
+  <!-- Gallery-->
+  <section class="wrapper fade-up" id="gallery">
+    <div class="inner">
+      <h2 class="major">Gallery</h2>
+    </div>
+  </section>
+  <!-- Contact-->
+  <section class="wrapper fade-up" id="contact">
+    <div class="inner">
+      <h2 class="major">Contact</h2>
+      <form enctype="text/plain" accept-charset="utf-8">
+        <!-- 寄件者姓名-->
+        <input id="nameText" type="text" name="Name" value="" size="60" placeholder="姓名(name)" required=""/>
+        <!-- required 必填欄位 ，placeholder 預設內容-->
+        <!-- 寄件者email-->
+        <input id="emailText" type="email" name="Email" value="" size="60" placeholder="Email" required=""/>
+        <!-- 寄件者電話-->
+        <input id="telText" type="tel" name="Phone" value="" size="60" aria-invalid="false" placeholder="電話(phone)" required=""/>
+        <!-- 郵件主旨-->
+        <input id="subText" type="text" name="Subject" value="" size="60" aria-invalid="false" placeholder="主旨(subject)" required=""/>
+        <!-- 郵件內容-->
+        <textarea id="bodyText" name="your-message" cols="40" rows="10" aria-required="true" aria-invalid="false" placeholder="你的訊息(Your Message)" required=""></textarea>
+        <!-- 傳送按鈕-->
+        <div>
+          <input type="button" value="送出訊息" onclick="submitHandler();"/><a id="mailTo"></a>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+<!-- Footer-->
+<footer class="wrapper style1-alt" id="footer">
+  <div class="inner">
+    <p>Thanks for watching!</p>
+  </div>
+</footer>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
