@@ -1,34 +1,46 @@
 @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap");
 :root {
-  --color-bg: #c0e0e6;
-  --color-text-main: #444;
-  --color-primary: #4378b6;
-  --color-secondary: #fdbb2d;
-  --color-white: #ececec;
-  --color-black: #444;
-  --linecolor: linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
-  --navfont-size: 1em;
-  --nav-height-space: 2.5em;
-  --nav-height-space-1280sidebar: calc(1em + 2.5em);
-  --nav-sidebar-width: 9em;
-  --nav-li-length: 5;
-  --wrapper-width: 80vw;
+  --color-bg:#c0e0e6;
+  --color-text-main:#444;
+  --color-primary:#4378b6;
+  --color-secondary:#fdbb2d;
+  --color-white:#ececec;
+  --color-black:#444;
+  --linecolor:linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  --navfont-size:1em;
+  --nav-height-space:3.5em;
+  --nav-sidebar-width:9em;
+  --nav-li-length:5;
+  --wrapper-width:60vw;
 }
 
+/*   border: 1px solid; */
 *, :after, :before {
   box-sizing: border-box;
 }
 
+/*拿掉會破版－因為製作反應後的漸層有用到:after, :before，必須保留 */
 body {
   overflow-x: hidden;
-  padding: 0;
+  -ms-overflow-style: scrollbar;
+  -webkit-text-size-adjust: none;
   margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
-  font-family: 微軟正黑體;
+}
+
+/* adjust typography defaults */
+body {
+  font-family: "Fredoka", Noto Sans TC, sans-serif;
   letter-spacing: 0.2em;
 }
 
+@-ms-viewport {
+  width: device-width;
+}
 ul {
   list-style: none;
   padding: 0;
@@ -36,6 +48,11 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+.title {
+  color: red;
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
 }
 
 #wrapper {
@@ -48,11 +65,28 @@ a {
 
 /* --- */
 @media screen and (max-width: 1280px) {
-  #wrapper > .wrapper {
-    border-left: 0;
+  body {
+    display: flex;
+    flex-direction: column;
   }
-
-  .wrapper.fullscreen {
+}
+/* 特殊高度測試 */
+@media screen and (max-height: 500px) {
+  #wrapper > .wrapper.fullscreen {
+    width: 50vw;
+    min-height: 500px;
+  }
+}
+@media screen and (max-width: 1280px) {
+  #wrapper {
+    margin-top: calc(-1 * var(--nav-height-space));
+    /* 控制sidebar到頂部的位移 */
+  }
+  #wrapper > .wrapper {
+    width: 80vw;
+  }
+  #wrapper > .wrapper.fullscreen {
+    margin-top: var(--nav-height-space);
     height: calc(100vh - var(--nav-height-space));
   }
 }
@@ -62,6 +96,7 @@ a {
   }
 
   #wrapper .fullscreen {
+    padding: 0 2em;
     height: auto;
   }
 }
@@ -86,22 +121,20 @@ a {
     width: 100%;
   }
   #wrapper .wrapper > .inner {
-    padding: 2em 2em 3em;
+    padding: 3em 3em 2em;
   }
 
-  /*假如要起用小寬度sidebar隱藏，要一起打開*/
+  /*假如要起用小寬度sidebar隱藏，要一起打開 */
+  /*   #wrapper {padding-top: 0} */
+  /*   #sidebar {display: none} */
+  /*位置都一起被隱藏 */
 }
 /* ---無限制寬度 */
-.title {
-  color: red;
-  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
-}
-
 .wrapper {
-  position: relative;
-  background-color: var(--color-white);
-  border-left: var(--nav-sidebar-width) solid var(--color-bg);
   width: var(--wrapper-width);
+  background-color: var(--color-white);
+  position: relative;
+  margin: 0 auto;
 }
 .wrapper > .inner {
   padding: 5em 5em 3em;
@@ -119,9 +152,8 @@ a {
   width: var(--nav-sidebar-width);
   height: 100vh;
   text-align: center;
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: calc((100vw - (var(--nav-sidebar-width) + var(--wrapper-width))) / 2 + 4.5em);
   overflow-x: hidden;
   overflow-y: auto;
   opacity: 1;
@@ -137,7 +169,6 @@ a {
   height: 100%;
   width: 100%;
 }
-
 #sidebar nav {
   background: var(--color-primary);
   padding: 0 20px;
@@ -180,7 +211,7 @@ a {
   position: relative;
 }
 #sidebar nav a:after, #sidebar nav a:before {
-  /*sidebar超連結 線漸層*/
+  /*sidebar超連結 線漸層 */
   bottom: 0;
   content: "";
   height: 0.12em;
@@ -192,15 +223,17 @@ a {
   background: rgba(255, 255, 255, 0.5);
 }
 #sidebar nav a:after {
-  /*sidebar超連結 線漸層*/
+  /* sidebar超連結 線漸層 */
   background: var(--linecolor);
   transition: max-width 0.2s ease;
   max-width: 0;
 }
 #sidebar nav a.active, #sidebar nav a:hover {
+  /* js事件 */
   color: white;
 }
 #sidebar nav a.active:after {
+  /* sidebar超連結反應後 */
   max-width: 100%;
 }
 
@@ -219,7 +252,7 @@ body.variant-strm_light #sidebar nav ul li {
     top: 0;
     left: 0;
     width: 100%;
-    height: var(--nav-height-space-1280sidebar);
+    height: var(--nav-height-space);
     line-height: 3.5em;
     overflow: hidden;
     padding: 0;
