@@ -8,76 +8,52 @@
   --color-black: #444;
   --linecolor: linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
   --navfont-size: 1em;
-  --nav-height-space: 2.5em /*2.5em*/;
+  --nav-height-space: 2.5em;
   --nav-height-space-1280sidebar: calc(1em + 2.5em);
-  --nav-height-space-wrapper-calc: 0.8em;
-  --nav-sidebar-maxwidth: 9em;
-  --nav-margin-left: 0em;
+  --nav-sidebar-width: 9em;
   --nav-li-length: 5;
+  --wrapper-width: 80vw;
 }
 
 *, :after, :before {
   box-sizing: border-box;
 }
 
-@-ms-viewport {
-  width: device-width;
-}
 body {
   overflow-x: hidden;
-  -ms-overflow-style: scrollbar;
-  -webkit-text-size-adjust: none;
-  font-family: 微軟正黑體;
-}
-
-#footer, header, body {
-  background: var(--color-primary);
-}
-
-#wrapper, body, html {
   padding: 0;
   margin: 0;
-}
-
-.wrapper {
-  position: relative;
-  background-color: var(--color-bg);
-}
-.wrapper > .inner {
-  padding: 5em 5em 3em;
-  max-width: 100%;
-  width: 75em;
-}
-.wrapper.fullscreen {
-  display: -moz-flex;
-  display: -ms-flex;
   display: flex;
-  -moz-flex-direction: column;
-  flex-direction: column;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
   justify-content: center;
-  height: 100vh;
+  font-family: 微軟正黑體;
+  letter-spacing: 0.2em;
 }
 
-/* --- */
-#sidebar + #wrapper {
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#wrapper {
   overflow: hidden;
+}
+
+#footer, body {
+  background: var(--color-bg);
 }
 
 /* --- */
 @media screen and (max-width: 1280px) {
-  #sidebar + #wrapper {
-    margin-left: 0;
-    padding-top: 0;
+  #wrapper > .wrapper {
+    border-left: 0;
   }
 
   .wrapper.fullscreen {
     height: calc(100vh - var(--nav-height-space));
-  }
-
-  body > #footer, #sidebar + #wrapper {
-    padding-left: 0;
   }
 }
 @media screen and (max-width: 736px) {
@@ -85,57 +61,75 @@ body {
     height: var(--nav-height-space);
   }
 
-  body .wrapper.fullscreen {
+  #wrapper .fullscreen {
     height: auto;
+  }
+}
+@media screen and (max-width: 480px) {
+  .title {
+    font-size: 2em;
+    padding: 0.5em 0;
+  }
+
+  #sidebar {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  #sidebar #nav a {
+    height: 6em;
+    line-height: 6em;
+  }
+
+  #wrapper .fullscreen {
+    height: auto;
+  }
+  #wrapper .wrapper {
+    width: 100%;
+  }
+  #wrapper .wrapper > .inner {
+    padding: 2em 2em 3em;
   }
 
   /*假如要起用小寬度sidebar隱藏，要一起打開*/
 }
-@media screen and (max-width: 480px) {
-  .title {
-    font-size: 1.25em;
-    padding: 1em 0;
-  }
-
-  > nav {
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    text-align: inherit;
-  }
-  > nav > ul > li {
-    margin-left: 1.5em;
-  }
-  > nav > ul > li a {
-    height: 6em;
-    line-height: 6em;
-  }
-}
 /* ---無限制寬度 */
-#wrapper {
-  padding-left: var(--nav-sidebar-maxwidth);
+.title {
+  color: red;
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+}
+
+.wrapper {
+  position: relative;
+  background-color: var(--color-white);
+  border-left: var(--nav-sidebar-width) solid var(--color-bg);
+  width: var(--wrapper-width);
+}
+.wrapper > .inner {
+  padding: 5em 5em 3em;
+  width: 100%;
+  height: 100%;
+}
+.wrapper.fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
 }
 
 #sidebar {
-  padding: 10px 0px;
-  cursor: default;
+  width: var(--nav-sidebar-width);
   height: 100vh;
-  width: var(--nav-sidebar-maxwidth);
-  left: 0;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: calc((100vw - (var(--nav-sidebar-width) + var(--wrapper-width))) / 2 + 4.5em);
   overflow-x: hidden;
   overflow-y: auto;
-  position: fixed;
-  text-align: center;
-  top: 0;
-  background-color: var(--color-primary);
-  z-index: 10000;
+  opacity: 1;
+  z-index: 1000;
 }
 #sidebar > .inner {
-  display: -moz-flex;
-  display: -ms-flex;
   display: flex;
-  -moz-flex-direction: column;
   flex-direction: column;
-  -moz-justify-content: center;
-  -ms-justify-content: center;
   justify-content: center;
   transform: translateY(0);
   transition: opacity 1s ease;
@@ -145,11 +139,8 @@ body {
 }
 
 #sidebar nav {
+  background: var(--color-primary);
   padding: 0 20px;
-}
-#sidebar nav ul {
-  padding: 0;
-  list-style: none;
 }
 #sidebar nav li {
   text-transform: capitalize;
@@ -187,7 +178,6 @@ body {
   outline: 0;
   padding: 1.1em 0;
   position: relative;
-  text-decoration: none;
 }
 #sidebar nav a:after, #sidebar nav a:before {
   /*sidebar超連結 線漸層*/
@@ -234,39 +224,33 @@ body.variant-strm_light #sidebar nav ul li {
     overflow: hidden;
     padding: 0;
   }
-  #sidebar > .inner {
-    -moz-flex-direction: row;
-    flex-direction: row;
-    -moz-align-items: stretch;
-    -ms-align-items: stretch;
-    align-items: stretch;
-    height: inherit;
-    line-height: inherit;
-  }
-  #sidebar nav {
-    height: inherit;
-    line-height: inherit;
-  }
-  #sidebar nav ul {
-    height: inherit;
-    line-height: inherit;
-    display: -moz-flex;
-    display: -ms-flex;
+  #sidebar #nav ul {
     display: flex;
-    margin: 0;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 0.8em;
   }
-  #sidebar nav ul li {
+  #sidebar #nav ul li {
     width: calc(100vw / var(--nav-li-length) - 1.5em);
-    display: block;
-    margin: 0 0 0 2em;
+    min-width: 80px;
+    margin: 0 0 0 0.5em;
   }
-  #sidebar nav a, #sidebar nav ul li {
+  #sidebar #nav a, #sidebar #nav ul li {
     height: inherit;
     line-height: inherit;
     padding: 0;
   }
 }
 /* ---.fade-up動畫 */
+#sidebar {
+  transition: box-shadow 1s ease;
+  transition: opacity 0.5s ease;
+}
+
+body.variant-strm_light #sidebar {
+  opacity: 0;
+}
+
 .wrapper.fade-up > .inner {
   transform: translateY(0);
   transition: opacity 1s ease, transform 1s ease;
@@ -281,8 +265,4 @@ body.variant-strm_light .wrapper.fade-up > .inner {
 .wrapper.fade > .inner {
   transition: opacity 1s ease;
   opacity: 1;
-}
-
-body.variant-strm_light .wrapper.fade > .inner {
-  opacity: 0;
 }
