@@ -1,5 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;700&display=swap')
+// BREAK WIDTH(響應適 螢幕寬度－分段)
+$break_large: 1280px
+$break_medium: 768px
+$break_small: 480px
 
+// ---小於480px
+@mixin mobile
+  @media screen and (max-width: $break_small)
+    @content
+// ---小於768px
+@mixin pad
+  @media screen and (max-width: $break_medium)
+    @content
+// ---小於1280px
+@mixin pc
+  @media screen and (max-width: $break_large)
+    @content
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;700&display=swap')
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap')
 
 \:root
@@ -17,11 +34,15 @@
   --wrapper-width:60vw
 
 * 
-/*   border: 1px solid; */
+  // border: 1px solid
 
 *, :after, :before
-  box-sizing: border-box
-/*拿掉會破版－因為製作反應後的漸層有用到:after, :before，必須保留
+  box-sizing: border-box/*拿掉會破版－因為製作反應後的漸層有用到:after, :before，必須保留*/
+
+/* adjust typography defaults
+body
+  font-family: "Fredoka", Noto Sans TC, sans-serif
+  letter-spacing: 0.2em
 
 body
   overflow-x: hidden
@@ -31,14 +52,13 @@ body
   padding: 0
   display: flex
   justify-content: center
-
-/* adjust typography defaults
-body
-  font-family: "Fredoka", Noto Sans TC, sans-serif
-  letter-spacing: 0.2em
+  @include pc
+    display: flex
+    flex-direction: column
 
 @-ms-viewport 
   width: device-width
+/* 在 Modern IE10 中使用 @-ms-viewport 來設定可視區域 (viewport) 的大小(有機會再深入了解)*/
   
 ul
   list-style: none
@@ -50,93 +70,66 @@ a
 .title
   color: red
   box-shadow: 5px 5px 8px rgba(black, 0.3)
-
-#wrapper
-  overflow: hidden
+  @include mobile
+    color: green
+    font-size: 2em
+    padding: 0.5em 0
 
 #footer, body
   background: var(--color-bg)
-
-/* ---
-@media screen and (max-width: 1280px)
-  body
-    display: flex
-    flex-direction: column
     
 /* 特殊高度測試
 @media screen and (max-height: 500px)
   #wrapper > .wrapper.fullscreen
     width: 50vw
     min-height: 500px
+    background-color: LemonChiffon
 
-@media screen and (max-width: 1280px)
-  #wrapper
-    margin-top: calc(-1 * var(--nav-height-space))
-    /* 控制sidebar到頂部的位移
-
-    > .wrapper
-      width: 80vw
-
-      &.fullscreen
-        margin-top: var(--nav-height-space)
-        height: calc(100vh - var(--nav-height-space))
-        // border: solid 2px blue
-
-@media screen and (max-width: 736px)
-  #sidebar
-    height: var(--nav-height-space)
-
-  #wrapper .fullscreen
-    padding: 0 2em
-    height: auto
-    // border: solid 2px red
-
-@media screen and (max-width: 480px)
-  .title
-    font-size: 2em
-    padding: 0.5em 0
-
-  #sidebar
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5)
-
-    #nav a
-      height: 6em
-      line-height: 6em
-
-  #wrapper
-    .fullscreen
-      height: auto
-      // border: solid 2px green
-
-    .wrapper
-      width: 100%
-
-      > .inner
-        padding: 3em 3em 2em
-
-  /*假如要起用小寬度sidebar隱藏，要一起打開
-  /*   #wrapper {padding-top: 0}
-  /*   #sidebar {display: none}
-  /*位置都一起被隱藏
+// 假如要起用小寬度sidebar隱藏，要一起打開
+// @media screen and (max-width: $break_small)
+   // #wrapper
+   //  padding-top: 0
+   // #sidebar
+   //  display: none
 
 /* ---無限制寬度
-
+#wrapper
+  overflow: hidden
+  @include pc
+    margin-top: calc(-1 * var(--nav-height-space))
 .wrapper
   width: var(--wrapper-width)
   background-color: var(--color-white)
   position: relative
   margin: 0 auto
+  @include mobile
+    width: 100%
+  @include pc
+    width: 80vw
 
   > .inner
     padding: 5em 5em 3em
     width: 100%
     height: 100%
+    @include mobile
+      padding: 3em 3em 2em
 
   &.fullscreen
     display: flex
     flex-direction: column
     justify-content: center
     height: 100vh
+    @include mobile
+      height: auto
+      // border: solid 2px green
+    @include pad
+      padding: 0 2em
+      height: auto
+      // border: solid 2px red
+    @include pc
+      margin-top: var(--nav-height-space)
+      height: calc(100vh - var(--nav-height-space))
+      // border: solid 2px blue
 
 #sidebar
   width: var(--nav-sidebar-width)
@@ -148,6 +141,18 @@ a
   overflow-y: auto
   opacity: 1
   z-index: 1000
+  @include mobile
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5)
+  @include pad
+    height: var(--nav-height-space)
+  @include pc
+    top: 0
+    left: 0
+    width: 100%
+    height: var(--nav-height-space)
+    line-height: 3.5em
+    overflow: hidden
+    padding: 0
 
   > .inner
     display: flex
@@ -162,6 +167,12 @@ a
   nav
     background: var(--color-primary)
     padding: 0 20px
+    ul
+      @include pc
+        display: flex
+        flex-direction: row
+        justify-content: center
+        margin-right: 0.8em
 
     li
       text-transform: capitalize
@@ -170,6 +181,10 @@ a
       margin: 1.5em 0 0
       opacity: 1
       cursor: pointer
+      @include pc
+        width: calc(100vw / var(--nav-li-length) - 1.5em)
+        min-width: 80px
+        margin: 0 0 0 0.5em
 
       &:first-child
         margin: 0
@@ -199,6 +214,9 @@ a
       outline: 0
       padding: 1.1em 0
       position: relative
+      @include mobile
+        height: 6em
+        line-height: 6em
 
       &:after, &:before
         /*sidebar超連結 線漸層
@@ -225,6 +243,11 @@ a
       &.active:after
         /* sidebar超連結反應後
         max-width: 100%
+    a, ul li
+      @include pc
+        height: inherit
+        line-height: inherit
+        padding: 0
 
 /* 進場動畫預設
 
@@ -235,34 +258,6 @@ body.variant-strm_light #sidebar
   nav ul li
     transform: translateY(2em)
     opacity: 0
-
-/* ---小於1280px視窗sidebar
-@media screen and (max-width: 1280px)
-  #sidebar
-    top: 0
-    left: 0
-    width: 100%
-    height: var(--nav-height-space)
-    line-height: 3.5em
-    overflow: hidden
-    padding: 0
-
-    #nav
-      ul
-        display: flex
-        flex-direction: row
-        justify-content: center
-        margin-right: 0.8em
-
-        li
-          width: calc(100vw / var(--nav-li-length) - 1.5em)
-          min-width: 80px
-          margin: 0 0 0 0.5em
-
-      a, ul li
-        height: inherit
-        line-height: inherit
-        padding: 0
 
 /* ---.fade-up動畫
 
