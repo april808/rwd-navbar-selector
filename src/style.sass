@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;700&display=swap')
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap')
+
+\:root
+  --color-bg:#c0e0e6
+  --color-text-main:#444
+  --color-primary:#4378b6
+  --color-secondary:#fdbb2d
+  --color-white:#ececec
+  --color-black:#444
+  --linecolor:linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%)
+  --navfont-size:1em
+  --nav-height-space:3.5em
+  --nav-sidebar-width:9em
+  --nav-li-length:5
+  --wrapper-width:60vw
+
+* 
+/*   border: 1px solid; */
+
+*, :after, :before
+  box-sizing: border-box
+/*拿掉會破版－因為製作反應後的漸層有用到:after, :before，必須保留
+
+body
+  overflow-x: hidden
+  -ms-overflow-style: scrollbar
+  -webkit-text-size-adjust: none
+  margin: 0
+  padding: 0
+  display: flex
+  justify-content: center
+
+/* adjust typography defaults
+body
+  font-family: "Fredoka", Noto Sans TC, sans-serif
+  letter-spacing: 0.2em
+
+@-ms-viewport 
+  width: device-width
+  
+ul
+  list-style: none
+  padding: 0
+
+a
+  text-decoration: none
+
+.title
+  color: red
+  box-shadow: 5px 5px 8px rgba(black, 0.3)
+
+#wrapper
+  overflow: hidden
+
+#footer, body
+  background: var(--color-bg)
+
+/* ---
+@media screen and (max-width: 1280px)
+  body
+    display: flex
+    flex-direction: column
+    
+/* 特殊高度測試
+@media screen and (max-height: 500px)
+  #wrapper > .wrapper.fullscreen
+    width: 50vw
+    min-height: 500px
+
+@media screen and (max-width: 1280px)
+  #wrapper
+    margin-top: calc(-1 * var(--nav-height-space))
+    /* 控制sidebar到頂部的位移
+
+    > .wrapper
+      width: 80vw
+
+      &.fullscreen
+        margin-top: var(--nav-height-space)
+        height: calc(100vh - var(--nav-height-space))
+        // border: solid 2px blue
+
+@media screen and (max-width: 736px)
+  #sidebar
+    height: var(--nav-height-space)
+
+  #wrapper .fullscreen
+    padding: 0 2em
+    height: auto
+    // border: solid 2px red
+
+@media screen and (max-width: 480px)
+  .title
+    font-size: 2em
+    padding: 0.5em 0
+
+  #sidebar
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5)
+
+    #nav a
+      height: 6em
+      line-height: 6em
+
+  #wrapper
+    .fullscreen
+      height: auto
+      // border: solid 2px green
+
+    .wrapper
+      width: 100%
+
+      > .inner
+        padding: 3em 3em 2em
+
+  /*假如要起用小寬度sidebar隱藏，要一起打開
+  /*   #wrapper {padding-top: 0}
+  /*   #sidebar {display: none}
+  /*位置都一起被隱藏
+
+/* ---無限制寬度
+
+.wrapper
+  width: var(--wrapper-width)
+  background-color: var(--color-white)
+  position: relative
+  margin: 0 auto
+
+  > .inner
+    padding: 5em 5em 3em
+    width: 100%
+    height: 100%
+
+  &.fullscreen
+    display: flex
+    flex-direction: column
+    justify-content: center
+    height: 100vh
+
+#sidebar
+  width: var(--nav-sidebar-width)
+  height: 100vh
+  text-align: center
+  position: sticky
+  top: 0
+  overflow-x: hidden
+  overflow-y: auto
+  opacity: 1
+  z-index: 1000
+
+  > .inner
+    display: flex
+    flex-direction: column
+    justify-content: center
+    transform: translateY(0)
+    transition: opacity 1s ease
+    opacity: 1
+    height: 100%
+    width: 100%
+
+  nav
+    background: var(--color-primary)
+    padding: 0 20px
+
+    li
+      text-transform: capitalize
+      transform: translateY(0)
+      transition: opacity 0.15s ease, transform 0.75s ease
+      margin: 1.5em 0 0
+      opacity: 1
+      cursor: pointer
+
+      &:first-child
+        margin: 0
+        transition-delay: 0.45s
+
+      &:nth-child(2)
+        transition-delay: 0.65s
+
+      &:nth-child(3)
+        transition-delay: 0.85s
+
+      &:nth-child(4)
+        transition-delay: 1.05s
+
+      &:nth-child(5)
+        transition-delay: 1.25s
+
+    a
+      transition: color 0.3s ease
+      border: 0
+      color: rgba(255, 255, 255, 0.4)
+      display: block
+      font-size: var(--navfont-size)
+      font-weight: 700
+      letter-spacing: 0.2em
+      line-height: 1
+      outline: 0
+      padding: 1.1em 0
+      position: relative
+
+      &:after, &:before
+        /*sidebar超連結 線漸層
+        bottom: 0
+        content: ""
+        height: 0.12em
+        position: absolute
+        right: 0
+        width: 100%
+
+      &:before
+        background: rgba(255, 255, 255, 0.5)
+
+      &:after
+        /* sidebar超連結 線漸層
+        background: var(--linecolor)
+        transition: max-width 0.2s ease
+        max-width: 0
+
+      &.active, &:hover
+        /* js事件
+        color: white
+
+      &.active:after
+        /* sidebar超連結反應後
+        max-width: 100%
+
+/* 進場動畫預設
+
+body.variant-strm_light #sidebar
+  > .inner
+    opacity: 0
+
+  nav ul li
+    transform: translateY(2em)
+    opacity: 0
+
+/* ---小於1280px視窗sidebar
+@media screen and (max-width: 1280px)
+  #sidebar
+    top: 0
+    left: 0
+    width: 100%
+    height: var(--nav-height-space)
+    line-height: 3.5em
+    overflow: hidden
+    padding: 0
+
+    #nav
+      ul
+        display: flex
+        flex-direction: row
+        justify-content: center
+        margin-right: 0.8em
+
+        li
+          width: calc(100vw / var(--nav-li-length) - 1.5em)
+          min-width: 80px
+          margin: 0 0 0 0.5em
+
+      a, ul li
+        height: inherit
+        line-height: inherit
+        padding: 0
+
+/* ---.fade-up動畫
+
+#sidebar
+  transition: box-shadow 1s ease
+  transition: opacity 0.5s ease
+
+body.variant-strm_light #sidebar
+  opacity: 0
+
+.wrapper.fade-up > .inner
+  transform: translateY(0)
+  transition: opacity 1s ease, transform 1s ease
+  opacity: 1
+
+body.variant-strm_light .wrapper.fade-up > .inner
+  opacity: 0
+  transform: translateY(1em)
+
+.wrapper.fade > .inner
+  transition: opacity 1s ease
+  opacity: 1

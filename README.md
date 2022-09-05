@@ -7,7 +7,7 @@ A Pen created on CodePen.io.
 網頁預覽：
 
 1. CodePen URL: [https://codepen.io/april808/pen/YzaJWzV](https://codepen.io/april808/pen/YzaJWzV).
-1. GitHub: [https://april808.github.io/rwd-navbar-selector/](https://april808.github.io/rwd-navbar-selector/)
+1. GitHub: [https://april808.github.io/rwd-navbar-selector/dist/index.html](https://april808.github.io/rwd-navbar-selector/dist/index.html)
 
 
 網頁說明：

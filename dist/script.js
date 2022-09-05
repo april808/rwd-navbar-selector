@@ -34,10 +34,8 @@ var vm=new Vue({
                 $('body').removeClass('variant-strm_light');
             }, 1200);/*於1.2秒時拿掉隱藏用CSS*/
         })
-        .on('click','a',function(event){/*nav超連結動畫*/
-            event.preventDefault();/*停止事件的默認動作*/
+        .on('click','a',function(){/*nav超連結動畫*/
             var target= $(this).attr("href");
-
             $('html,body').animate({
               scrollTop: $(target).offset().top
             },600);
