@@ -9,29 +9,17 @@ var nav_data={
     {name:"contact"}
   ],
 };
-// navlist: ["home","profile","gallery","contact"]
-
-/* v-bind:id="'#' + title" */
 var vm=new Vue({
   el: "#nav",
-  data: nav_data,
+  data: nav_data
 });
-//wrapper資料----------------------
+//wrapper----------------------
 var vm=new Vue({
   el: "#wrapper",
-  data: nav_data,
-});
-//nav超連結----------------------
-$(document).on('click','a',function(event){/*nav超連結動畫*/
-  event.preventDefault();/*停止事件的默認動作*/
-  var target= $(this).attr("href");
-
-  $('html,body').animate({
-    scrollTop: $(target).offset().top
-  },600);
+  data: nav_data
 });
 
-//進場動態
+//進場動態和超連結反應事件
 (function ($) {
     $('body').addClass('variant-strm_light');/*先綁隱藏的CSS*/
     $('#home').addClass('fullscreen');
@@ -46,6 +34,12 @@ $(document).on('click','a',function(event){/*nav超連結動畫*/
                 $('body').removeClass('variant-strm_light');
             }, 1200);/*於1.2秒時拿掉隱藏用CSS*/
         })
+        .on('click','a',function(){/*nav超連結動畫*/
+            var target= $(this).attr("href");
+            $('html,body').animate({
+              scrollTop: $(target).offset().top
+            },600);
+        })
         .on('scroll', function () {/*偵測超連結位置*/
             initScroll(menuSelector);
         });/*$(document)結尾*/
@@ -53,7 +47,7 @@ $(document).on('click','a',function(event){/*nav超連結動畫*/
     function initScroll(menuSelector) {
         var scrollPosition = $(window).scrollTop() + 5;
       
-        menuSelector.each(function () {/*.each每個元素運作函數*/
+        menuSelector.each(function () {/*.each()每個元素運作函數*/
             var currLink = $(this);
             var refElement = $(currLink.attr("href"));
             if (refElement.position().top <= scrollPosition && refElement.position().top + refElement.height() > scrollPosition) {/*設定螢幕範圍運作.active(CSS)*/
