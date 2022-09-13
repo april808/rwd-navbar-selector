@@ -16,4 +16,4 @@ A Pen created on CodePen.io.
 1. 使用Vue2框架的資料格式，建立html畫面。
 1. 將 .wrapper `position: fixed` 改 `position: sticky` 浮動。
 1. 使用`:root`管理 CSS。
-1. 使用Sass管理自適應區塊。
+1. 無CSS框架，使用Sass管理自適應區塊。
