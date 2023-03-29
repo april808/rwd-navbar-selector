@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Nav - Vue2 (test)3-Sass自適應分塊</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Sidebar-->
+<div id="sidebar">
+  <div class="inner">
+    <nav id="nav">
+      <ul>
+        <li v-for="nav in navlist"><a v-bind:href="'#' + nav.name">{{nav.name}}</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<!-- Wrapper-->
+<div id="wrapper">
+  <section v-for="(title, index) in navlist" v-bind:class="[wrapper,fadeup]" v-bind:id="title.name">
+    <div class="inner">
+      <h2 class="title" v-if="title.name!=='home'">{{index+1}}.{{title.name}}</h2>
+      <div class="home" v-if="title.name=='home'">
+        <h2>Hello ~</h2><img src="https://april808.github.io/blog_website/assets/image/logo/MyLogo.vectornator1.svg" alt="MyLogo"/><br/><a class="btn btn-info" href="https://codepen.io/april808" target="_blank">Codepen</a>
+      </div>
+      <p v-else="title.name=='home'">
+         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam facilis tempora dignissimos totam quisquam optio quis autem. Aut dolore reiciendis reprehenderit accusantium iste, eligendi quasi eos culpa consequatur optio laudantium.</p>
+    </div>
+  </section>
+  <footer id="footer" v-bind:class="[wrapper,fadeup]">
+    <div class="inner">
+      <p>Thanks for watching!</p>
+    </div>
+  </footer>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

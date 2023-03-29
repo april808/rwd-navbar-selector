@@ -1,0 +1,325 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap");
+:root {
+  --color-bg:#c0e0e6;
+  --color-text-main:#444;
+  --color-primary:#4378b6;
+  --color-secondary:#fdbb2d;
+  --color-white:#ececec;
+  --color-black:#444;
+  --linecolor:linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  --navfont-size:1em;
+  --nav-height-space:3.5em;
+  --nav-sidebar-width:9em;
+  --nav-li-length:5;
+  --wrapper-width:60vw;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+/* adjust typography defaults */
+body {
+  font-family: "Fredoka", Noto Sans TC, sans-serif;
+  letter-spacing: 0.2em;
+}
+
+body {
+  overflow-x: hidden;
+  -ms-overflow-style: scrollbar;
+  -webkit-text-size-adjust: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 1280px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@-ms-viewport {
+  width: device-width;
+}
+/* 在 Modern IE10 中使用 @-ms-viewport 來設定可視區域 (viewport) 的大小(有機會再深入了解)*/
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.title {
+  color: var(--color-primary);
+  box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
+}
+@media screen and (max-width: 480px) {
+  .title {
+    color: green;
+    font-size: 2em;
+    padding: 0.5em 0;
+  }
+}
+
+.home {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.home img {
+  width: 150px;
+  height: auto;
+  border-radius: 50%;
+}
+
+#footer, body {
+  background: var(--color-bg);
+}
+
+/* 特殊高度測試 */
+@media screen and (max-height: 500px) {
+  #wrapper > .wrapper.fullscreen {
+    width: 50vw;
+    min-height: 500px;
+    background-color: LemonChiffon;
+  }
+}
+/* ---無限制寬度 */
+#wrapper {
+  overflow: hidden;
+}
+@media screen and (max-width: 1280px) {
+  #wrapper {
+    margin-top: calc(-1 * var(--nav-height-space));
+  }
+}
+
+.wrapper {
+  width: var(--wrapper-width);
+  background-color: var(--color-white);
+  position: relative;
+  margin: 0 auto;
+}
+@media screen and (max-width: 480px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .wrapper {
+    width: 80vw;
+  }
+}
+.wrapper > .inner {
+  padding: 5em 5em 3em;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 480px) {
+  .wrapper > .inner {
+    padding: 3em 3em 2em;
+  }
+}
+.wrapper.fullscreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  max-height: 600px;
+}
+@media screen and (max-width: 480px) {
+  .wrapper.fullscreen {
+    height: auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  .wrapper.fullscreen {
+    padding: 0 2em;
+    height: auto;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .wrapper.fullscreen {
+    margin-top: var(--nav-height-space);
+    height: calc(100vh - var(--nav-height-space));
+  }
+}
+
+#sidebar {
+  width: var(--nav-sidebar-width);
+  height: 100vh;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 1;
+  z-index: 1000;
+}
+@media screen and (max-width: 480px) {
+  #sidebar {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+}
+@media screen and (max-width: 768px) {
+  #sidebar {
+    height: var(--nav-height-space);
+  }
+}
+@media screen and (max-width: 1280px) {
+  #sidebar {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--nav-height-space);
+    line-height: 3.5em;
+    overflow: hidden;
+    padding: 0;
+  }
+}
+#sidebar > .inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateY(0);
+  transition: opacity 1s ease;
+  opacity: 1;
+  height: 100%;
+  width: 100%;
+}
+#sidebar nav {
+  background: var(--color-primary);
+  padding: 0 20px;
+}
+@media screen and (max-width: 1280px) {
+  #sidebar nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-right: 0.8em;
+  }
+}
+#sidebar nav li {
+  text-transform: capitalize;
+  transform: translateY(0);
+  transition: opacity 0.15s ease, transform 0.75s ease;
+  margin: 1.5em 0 0;
+  opacity: 1;
+  cursor: pointer;
+}
+@media screen and (max-width: 1280px) {
+  #sidebar nav li {
+    width: calc(100vw / var(--nav-li-length) - 1.5em);
+    min-width: 80px;
+    margin: 0 0 0 0.5em;
+  }
+}
+#sidebar nav li:first-child {
+  margin: 0;
+  transition-delay: 0.45s;
+}
+#sidebar nav li:nth-child(2) {
+  transition-delay: 0.65s;
+}
+#sidebar nav li:nth-child(3) {
+  transition-delay: 0.85s;
+}
+#sidebar nav li:nth-child(4) {
+  transition-delay: 1.05s;
+}
+#sidebar nav li:nth-child(5) {
+  transition-delay: 1.25s;
+}
+#sidebar nav a {
+  transition: color 0.3s ease;
+  border: 0;
+  color: rgba(255, 255, 255, 0.4);
+  display: block;
+  font-size: var(--navfont-size);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  outline: 0;
+  padding: 1.1em 0;
+  position: relative;
+}
+@media screen and (max-width: 480px) {
+  #sidebar nav a {
+    height: 6em;
+    line-height: 6em;
+  }
+}
+#sidebar nav a:after, #sidebar nav a:before {
+  /*sidebar超連結 線漸層 */
+  bottom: 0;
+  content: "";
+  height: 0.12em;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+#sidebar nav a:before {
+  background: rgba(255, 255, 255, 0.5);
+}
+#sidebar nav a:after {
+  /* sidebar超連結 線漸層 */
+  background: var(--linecolor);
+  transition: max-width 0.2s ease;
+  max-width: 0;
+}
+#sidebar nav a.active, #sidebar nav a:hover {
+  /* js事件 */
+  color: white;
+}
+#sidebar nav a.active:after {
+  /* sidebar超連結反應後 */
+  max-width: 100%;
+}
+@media screen and (max-width: 1280px) {
+  #sidebar nav a, #sidebar nav ul li {
+    height: inherit;
+    line-height: inherit;
+    padding: 0;
+  }
+}
+
+/* 進場動畫預設 */
+body.variant-strm_light #sidebar > .inner {
+  opacity: 0;
+}
+body.variant-strm_light #sidebar nav ul li {
+  transform: translateY(2em);
+  opacity: 0;
+}
+
+/* ---.fade-up動畫 */
+#sidebar {
+  transition: box-shadow 1s ease;
+  transition: opacity 0.5s ease;
+}
+
+body.variant-strm_light #sidebar {
+  opacity: 0;
+}
+
+.wrapper.fade-up > .inner {
+  transform: translateY(0);
+  transition: opacity 1s ease, transform 1s ease;
+  opacity: 1;
+}
+
+body.variant-strm_light .wrapper.fade-up > .inner {
+  opacity: 0;
+  transform: translateY(1em);
+}
+
+.wrapper.fade > .inner {
+  transition: opacity 1s ease;
+  opacity: 1;
+}
