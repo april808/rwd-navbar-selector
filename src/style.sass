@@ -63,17 +63,25 @@ body
 ul
   list-style: none
   padding: 0
-
 a
   text-decoration: none
 
 .title
-  color: red
+  color: var(--color-primary)
   box-shadow: 5px 5px 8px rgba(black, 0.3)
   @include mobile
     color: green
     font-size: 2em
     padding: 0.5em 0
+.home
+  display: flex
+  // justify-content: center
+  align-items: center
+  flex-direction: column
+  img
+    width: 150px
+    height: auto
+    border-radius: 50%
 
 #footer, body
   background: var(--color-bg)
@@ -119,6 +127,7 @@ a
     flex-direction: column
     justify-content: center
     height: 100vh
+    max-height: 600px
     @include mobile
       height: auto
       // border: solid 2px green

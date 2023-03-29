@@ -9,11 +9,15 @@
 #wrapper
   section(v-for="(title, index) in navlist" v-bind:class="[wrapper,fadeup]" v-bind:id="title.name")
     .inner
-      h2.title {{index+1}}.{{title.name}}-
-      img(v-if="title.name=='home'" src="https://cdn.iconscout.com/icon/free/png-256/pen-354-450588.png")
-      p(v-if="title.name=='home'") hello -- #sidebar (position: fixed) 改 (position: sticky)浮動，捨棄 .wrapper (padding-left)改成(border-left)定位方式，直接(margin: 0 auto)。替換新的英文和中文字體。
-        a.btn.btn-info(href="https://www.google.com.tw/", target="_blank") 查看google
-      p(v-else="title.name=='home'") 英語為「bread」所謂麵包，就是以黑麥、小麥等糧食作物為基本原料，先磨成粉，再加水、鹽、酵母等和面並製成麵團坯料，然後再以烘、烤、蒸或煎等方式加熱製成的食品。麵包有時候也含有其他成分，例如牛奶、雞蛋、糖、香料、水果、果仁等等。麵包是最古老的加工食品之一，在新石器時代已經出現。
+      h2.title(v-if="title.name!=='home'") {{index+1}}.{{title.name}}
+      div.home(v-if="title.name=='home'")
+        h2 Hello ~
+        img(src="https://april808.github.io/blog_website/assets/image/logo/MyLogo.vectornator1.svg",
+      alt="MyLogo")
+        br
+        a.btn.btn-info(href="https://codepen.io/april808", target="_blank") Codepen
+      p(v-else="title.name=='home'") 
+        | Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam facilis tempora dignissimos totam quisquam optio quis autem. Aut dolore reiciendis reprehenderit accusantium iste, eligendi quasi eos culpa consequatur optio laudantium.
   footer#footer(v-bind:class="[wrapper,fadeup]")
     .inner
       p Thanks for watching!
